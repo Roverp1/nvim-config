@@ -11,6 +11,10 @@ map("n", "<leader>wt", "<CMD>Telescope keymaps<CR>", { desc = "Keymap cheatsheet
 -- none-ls keybinds
 -- map("n", "<leader>gf", vim.lsp.buf.format, {})
 
+map("n", "<leader>gf", function()
+  require("conform").format { async = true }
+end, { desc = "Format code with Conform" })
+
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
 -- remaps for centring
