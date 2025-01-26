@@ -64,4 +64,19 @@ return {
       }
     end,
   },
+
+  {
+    "barrett-ruth/live-server.nvim",
+    cmd = { "LiveServerStart", "LiveServerStop", "LiveServerToggle" },
+
+    config = function()
+      local live_server = require "live-server"
+
+      live_server.setup {
+        build = "pnpm add -g live-server",
+        cmd = { "LiveServerStart", "LiveServerStop" },
+        config = true,
+      }
+    end,
+  },
 }

@@ -17,6 +17,8 @@ end, { desc = "Format code with Conform" })
 
 -- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
+map("n", "<leader>sl", "<cmd>LiveServerToggle<cr>", { desc = "Toggle Live Server" })
+
 -- remaps for centring
 map("n", "<C-d>", "<C-d>zz", { desc = "Jump half a page down and center the screeen" })
 map("n", "<C-u>", "<C-u>zz", { desc = "Jump half a page up and center the screeen" })
