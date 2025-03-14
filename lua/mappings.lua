@@ -4,13 +4,16 @@ require "nvchad.mappings"
 
 local map = vim.keymap.set
 
--- map("n", ";", ":", { desc = "CMD enter command mode" })
+-- UNMAP
+map("n", "<C-i>", "<C-i>zz", { desc = "Go to next jump" })
+
+--
+
 map("i", "jk", "<ESC>")
 
--- none-ls keybinds
--- map("n", "<leader>gf", vim.lsp.buf.format, {})
-
--- map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
+map("i", "jl", function()
+  require("cmp").close()
+end, { desc = "Hide LSP popup menu in insert mode" })
 
 -- remaps for centring
 map("n", "<C-d>", "<C-d>zz", { desc = "Jump half a page down and center the screeen" })
@@ -31,6 +34,12 @@ map("n", "x", '"_x', { desc = "Save deleted character to the underlying register
 
 map("n", "<leader>sa", "gg<S-v>G", { desc = "󰒆 Select All" })
 
+-- Change window size
+map("n", "<C-'>", "<Cmd>vertical resize +2<CR>", { desc = "Resize window width by +2" })
+map("n", "<C-;>", "<Cmd>vertical resize -2<CR>", { desc = "Resize window width by -2" })
+map("n", "<C-+>", "<Cmd>horizontal resize +2<CR>", { desc = "Resize window height by +2" })
+map("n", "<C-->", "<Cmd>horizontal resize -2<CR>", { desc = "Resize window height by -2" })
+map("n", "<C-=>", "<C-w>=", { desc = "Resize window to default" })
 -- ------------
 -- | PLUGINS  |
 -- ------------
