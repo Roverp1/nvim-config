@@ -1,7 +1,6 @@
 -- Group names
-local resizing_fix = vim.api.nvim_create_augroup("resizing_fix", { clear = true })
-local highlight_yank = vim.api.nvim_create_augroup("highlight_yank", { clear = true })
-local folds_restore = vim.api.nvim_create_augroup("folds_restore", { clear = true })
+local resizing_fix = vim.api.nvim_create_augroup("resizingFix", { clear = true })
+local highlight_yank = vim.api.nvim_create_augroup("highlightYank", { clear = true })
 
 -- AUTOCMD FUNCTION
 -- try keep splits equally sized after automatic resizing
@@ -29,14 +28,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
-vim.api.nvim_create_autocmd("BufWinEnter", {
-  group = folds_restore,
-  pattern = "*",
-  command = "silent! loadview",
-})
-
-vim.api.nvim_create_autocmd("BufWinLeave", {
-  group = folds_restore,
-  pattern = "*",
-  command = "silent! mkview",
+vim.api.nvim_create_autocmd("BufEnter", {
+  nested = true,
+  callback = function()
+    if #vim.api.nvim_list_wins() == 1 and require("nvim-tree.utils").is_nvim_tree_buf() then
+      vim.cmd "quit"
+    end
+  end,
 })

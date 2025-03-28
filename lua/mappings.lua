@@ -15,6 +15,10 @@ map("i", "jl", function()
   require("cmp").close()
 end, { desc = "Hide LSP popup menu in insert mode" })
 
+-- map("i", "jj", function()
+--   require("cmp").open()
+-- end, { desc = "Open LSP popup menu in insert mode" })
+
 -- remaps for centring
 map("n", "<C-d>", "<C-d>zz", { desc = "Jump half a page down and center the screeen" })
 map("n", "<C-u>", "<C-u>zz", { desc = "Jump half a page up and center the screeen" })
@@ -40,6 +44,10 @@ map("n", "<C-;>", "<Cmd>vertical resize -2<CR>", { desc = "Resize window width b
 map("n", "<C-+>", "<Cmd>horizontal resize +2<CR>", { desc = "Resize window height by +2" })
 map("n", "<C-->", "<Cmd>horizontal resize -2<CR>", { desc = "Resize window height by -2" })
 map("n", "<C-=>", "<C-w>=", { desc = "Resize window to default" })
+
+map("n", "gb", "vato<ESC>zz", { desc = "󰅴 Go to opening of a tag" })
+map("n", "ge", "vat<ESC>zz", { desc = "󰅴 Go to closing of a tag" })
+
 -- ------------
 -- | PLUGINS  |
 -- ------------
@@ -60,3 +68,28 @@ end, { desc = " Format code with Conform" })
 
 -- Telescope
 map("n", "<leader>wt", "<CMD>Telescope keymaps<CR>", { desc = "Keymap cheatsheet in Telescope" })
+
+-- -------------
+-- | ADVANCED  |
+-- -------------
+-- maps with functions
+
+map("n", "<leader>ir", function()
+  local file_name = vim.fn.expand "%:t:r"
+  local lines = {
+    'import "./' .. file_name .. '.scss";',
+    "",
+    "const " .. file_name .. " = () => {",
+    "  return (",
+    "    <>",
+    "      <div></div>",
+    "    </>",
+    "  );",
+    "};",
+    "",
+    "export default " .. file_name .. ";",
+  }
+
+  vim.api.nvim_buf_set_lines(0, 0, 0, false, lines)
+  vim.api.nvim_win_set_cursor(0, { 6, 0 })
+end, { desc = " Initialize React component" })

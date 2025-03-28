@@ -29,9 +29,12 @@ require("lazy").setup({
 dofile(vim.g.base46_cache .. "defaults")
 dofile(vim.g.base46_cache .. "statusline")
 
+vim.opt.runtimepath:append "/usr/share/lua/5.4/"
+
 require "options"
 require "nvchad.autocmds"
 require "autocmds"
+require "userCommands"
 
 vim.schedule(function()
   require "mappings"

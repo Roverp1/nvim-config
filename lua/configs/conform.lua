@@ -6,6 +6,7 @@ local options = {
     javascriptreact = { "prettier" },
     python = { "black" },
     markdown = { "prettier" },
+    -- c = { "clang-format" },
   },
 
   notify_on_error = true,
