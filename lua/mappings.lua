@@ -69,6 +69,13 @@ end, { desc = " Format code with Conform" })
 -- Telescope
 map("n", "<leader>wt", "<CMD>Telescope keymaps<CR>", { desc = "Keymap cheatsheet in Telescope" })
 
+-- "christoomey/vim-tmux-navigator"
+map("n", "<c-h>", "<cmd> TmuxNavigateLeft<cr>", { desc = "Select left nvim/tmux pane" })
+map("n", "<c-j>", "<cmd> TmuxNavigateDown<cr>", { desc = "Select bottom nvim/tmux pane" })
+map("n", "<c-k>", "<cmd> TmuxNavigateUp<cr>", { desc = "Select bottom nvim/tmux pane" })
+map("n", "<c-l>", "<cmd> TmuxNavigateRight<cr>", { desc = "Select bottom nvim/tmux pane" })
+map("n", "<c-\\>", "<cmd> TmuxNavigatePrevious<cr>", { desc = "Select bottom nvim/tmux pane" })
+
 -- -------------
 -- | ADVANCED  |
 -- -------------

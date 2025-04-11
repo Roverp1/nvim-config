@@ -26,15 +26,17 @@ return {
 
   -- {
   --   "nvimtools/none-ls.nvim",
+  --   dependencies = {
+  --     "nvimtools/none-ls-extras.nvim",
+  --   },
+  --   event = "VeryLazy",
+  --
   --   config = function()
   --     local null_ls = require "null-ls"
   --     null_ls.setup {
   --       sources = {
-  --         null_ls.builtins.diagnostics.eslint_d.with {
-  --           diagnostics_format = "[eslint_d] #{m} (#{c})",
-  --         },
+  --         require "none-ls.diagnostics.eslint",
   --       },
-  --       debug = true,
   --     }
   --   end,
   -- },
@@ -228,5 +230,79 @@ return {
         -- hijack_file_patterns = { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.webp", "*.avif" },
       }
     end,
+  },
+
+  -- {
+  --   "HiPhish/rainbow-delimiters.nvim",
+  --   lazy = true,
+  --   event = "VeryLazy",
+  --   config = function()
+  --     require("rainbow-delimiters.setup").setup {
+  --       blacklist = { "html" },
+  --     }
+  --   end,
+  -- },
+
+  -- debugger setup(
+  -- {
+  --   "mfussenegger/nvim-dap",
+  --   dependencies = {
+  --     "rcarriga/nvim-dap-ui",
+  --     "nvim-neotest/nvim-nio",
+  --   },
+  --   event = "VeryLazy",
+  --
+  --   config = function()
+  --     local dap = require "dap"
+  --     local dapui = require "dapui"
+  --
+  --     dap.listeners.before.attach.dapui_config = function()
+  --       dapui.open()
+  --     end
+  --     dap.listeners.before.launch.dapui_config = function()
+  --       dapui.open()
+  --     end
+  --     dap.listeners.before.event_terminated.dapui_config = function()
+  --       dapui.close()
+  --     end
+  --     dap.listeners.before.event_exited.dapui_config = function()
+  --       dapui.close()
+  --     end
+  --
+  --     vim.keymap.set("n", "<Leader>dt", dap.toggle_breakpoint(), { desc = "toggle breakpoint" })
+  --     vim.keymap.set("n", "<Leader>dc", dap.continue, {})
+  --   end,
+  -- },
+
+  {
+    "christoomey/vim-tmux-navigator",
+    cmd = {
+      "TmuxNavigateLeft",
+      "TmuxNavigateDown",
+      "TmuxNavigateUp",
+      "TmuxNavigateRight",
+      "TmuxNavigatePrevious",
+      "TmuxNavigatorProcessList",
+    },
+    keys = {
+      { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
+      { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
+      { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
+      { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
+      { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+    },
+  },
+
+  {
+    "rmagatti/auto-session",
+    lazy = false,
+
+    ---enables autocomplete for opts
+    ---@module "auto-session"
+    ---@type AutoSession.Config
+    opts = {
+      suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+      -- log_level = 'debug',
+    },
   },
 }

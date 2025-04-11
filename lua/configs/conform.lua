@@ -7,6 +7,7 @@ local options = {
     python = { "black" },
     markdown = { "prettier" },
     -- c = { "clang-format" },
+    json = { "prettier" },
   },
 
   notify_on_error = true,
