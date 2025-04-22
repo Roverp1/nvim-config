@@ -34,6 +34,7 @@ vim.opt.runtimepath:append "/usr/share/lua/5.4/"
 require "options"
 require "nvchad.autocmds"
 require "autocmds"
+require "customMacros"
 require "userCommands"
 
 vim.schedule(function()
