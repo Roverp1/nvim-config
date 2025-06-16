@@ -305,4 +305,55 @@ return {
       -- log_level = 'debug',
     },
   },
+
+  {
+    "danymat/neogen",
+    dependencies = { "L3MON4D3/LuaSnip" },
+    cmd = "Neogen",
+    keys = {
+      {
+        "<leader>gng",
+        function()
+          require("neogen").generate {}
+        end,
+        desc = "Generate Neogen annotation",
+      },
+      {
+        "<leader>gnf",
+        function()
+          require("neogen").generate { type = "func" }
+        end,
+        desc = "Generate Neogen annotation for function",
+      },
+    },
+
+    config = function()
+      local neogen = require "neogen"
+
+      neogen.setup {
+        snippet_engine = "luasnip",
+      }
+    end,
+  },
+
+  {
+    "rest-nvim/rest.nvim",
+    ft = { "http" }, -- only load for .http files
+    cmd = { "Rest open", "Rest run", "Rest logs" }, -- also works on demand
+    keys = {
+      {
+        "<leader>rr",
+        "<cmd>Rest run<CR>",
+        desc = "󰗖 Run HTTP request",
+        ft = "http",
+      },
+    },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      opts = function(_, opts)
+        opts.ensure_installed = opts.ensure_installed or {}
+        table.insert(opts.ensure_installed, "http")
+      end,
+    },
+  },
 }
