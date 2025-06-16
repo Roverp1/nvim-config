@@ -4,7 +4,7 @@ require("nvchad.configs.lspconfig").defaults()
 local lspconfig = require "lspconfig"
 
 -- EXAMPLE
-local servers = { "html", "cssls", "ts_ls", "emmet_ls", "bashls", "pyright", "somesass_ls", "clangd", "jsonls" }
+local servers = { "html", "cssls", "ts_ls", "emmet_ls", "bashls", "pyright", "clangd", "jsonls" }
 local nvlsp = require "nvchad.configs.lspconfig"
 
 -- lsps with default config
@@ -26,11 +26,5 @@ end
 lspconfig.emmet_ls.setup {
   on_attach = nvlsp.on_attach,
   capabilities = nvlsp.capabilities,
-  filetypes = { "html", "javascriptreact", "typescriptreact", "css", "less" },
-}
-
-lspconfig.somesass_ls.setup {
-  on_attach = nvlsp.on_attach,
-  capabilities = nvlsp.capabilities,
-  filetypes = { "sass", "scss" },
+  filetypes = { "html", "javascriptreact", "typescriptreact", "css", "scss", "sass", "less" },
 }
