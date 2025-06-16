@@ -356,4 +356,29 @@ return {
       end,
     },
   },
+
+  {
+    "luckasRanarison/tailwind-tools.nvim",
+    name = "tailwind-tools",
+    build = ":UpdateRemotePlugins",
+    ft = { "html", "javascript", "typescript", "javascriptreact", "typescriptreact", "vue", "svelte" },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-telescope/telescope.nvim", -- optional
+      "neovim/nvim-lspconfig", -- optional
+    },
+    ---@type TailwindTools.Option
+    opts = {
+      document_color = {
+        enabled = true, -- can be toggled by commands
+        kind = "inline", -- "inline" | "foreground" | "background"
+        inline_symbol = "󱓻 ", -- only used in inline mode
+      },
+      conceal = {
+        enabled = true, -- can be toggled by commands
+        min_length = 100, -- only conceal classes exceeding the provided length
+        symbol = "󱏿", -- only a single character is allowed
+      },
+    },
+  },
 }
