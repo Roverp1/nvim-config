@@ -3,6 +3,7 @@ require "nvchad.mappings"
 -- add yours here
 
 local map = vim.keymap.set
+local unmap = vim.keymap.del
 
 -- UNMAP
 map("n", "<C-i>", "<C-i>zz", { desc = "Go to next jump" })
@@ -39,11 +40,12 @@ map("n", "x", '"_x', { desc = "Save deleted character to the underlying register
 map("n", "<leader>sa", "gg<S-v>G", { desc = "󰒆 Select All" })
 
 -- Change window size
-map("n", "<C-'>", "<Cmd>vertical resize +2<CR>", { desc = "Resize window width by +2" })
-map("n", "<C-;>", "<Cmd>vertical resize -2<CR>", { desc = "Resize window width by -2" })
-map("n", "<C-+>", "<Cmd>horizontal resize +2<CR>", { desc = "Resize window height by +2" })
+-- doenst fucnitnad s asdfasdf work
+map("n", "<C-,>", "<Cmd>vertical resize +2<CR>", { desc = "Resize window width by +2" })
+map("n", "<C-.>", "<Cmd>vertical resize -2<CR>", { desc = "Resize window width by -2" })
+map("n", "<C-=>", "<Cmd>horizontal resize +2<CR>", { desc = "Resize window height by +2" })
 map("n", "<C-->", "<Cmd>horizontal resize -2<CR>", { desc = "Resize window height by -2" })
-map("n", "<C-=>", "<C-w>=", { desc = "Resize window to default" })
+map("n", "<C-+>", "<C-w>=", { desc = "Resize window to default" })
 
 map("n", "gb", "vato<ESC>zz", { desc = "󰅴 Go to opening of a tag" })
 map("n", "ge", "vat<ESC>zz", { desc = "󰅴 Go to closing of a tag" })
