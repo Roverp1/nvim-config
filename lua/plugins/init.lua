@@ -381,4 +381,37 @@ return {
       },
     },
   },
+
+  {
+    "pwntester/octo.nvim",
+    cmd = { "Octo" },
+    keys = {
+      { "<leader>oo", "<cmd>Octo<cr>", desc = " Octo" },
+      { "<leader>op", "<cmd>Octo pr list<cr>", desc = "Octo pr list" },
+    },
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+      "nvim-tree/nvim-web-devicons",
+    },
+    config = function()
+      require("octo").setup {
+        enable_builtin = true,
+        use_local_fs = true,
+      }
+      vim.cmd [[hi OctoEditable guibg=none]]
+      vim.treesitter.language.register("markdown", "octo")
+    end,
+  },
+
+  {
+    "fasterius/simple-zoom.nvim",
+    cmd = { "SimpleZoomToggle" },
+    keys = {
+      { "<leader>z", "<cmd>SimpleZoomToggle<CR>", desc = "Zoom toggle" },
+    },
+    opts = {
+      hide_tabline = true,
+    },
+  },
 }
