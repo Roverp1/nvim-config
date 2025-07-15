@@ -375,7 +375,7 @@ return {
         inline_symbol = "󱓻 ", -- only used in inline mode
       },
       conceal = {
-        enabled = true, -- can be toggled by commands
+        enabled = false, -- can be toggled by commands
         min_length = 100, -- only conceal classes exceeding the provided length
         symbol = "󱏿", -- only a single character is allowed
       },
@@ -413,5 +413,29 @@ return {
     opts = {
       hide_tabline = true,
     },
+  },
+
+  {
+    "codethread/qmk.nvim",
+    cmd = { "QMKFormat" },
+    ft = "dts",
+    --
+    config = function()
+      local qmk = require "qmk"
+
+      ---@type qmk.UserConfig
+      local conf = {
+        name = "lily58",
+        layout = {
+          "x x x x x x _ _ _ x x x x x x",
+          "x x x x x x _ _ _ x x x x x x",
+          "x x x x x x _ _ _ x x x x x x",
+          "x x x x x x x _ x x x x x x x",
+          "_ _ _ x x x x _ x x x x _ _ _",
+        },
+        variant = "zmk",
+      }
+      require("qmk").setup(conf)
+    end,
   },
 }
