@@ -441,7 +441,16 @@ return {
 
   {
     "greggh/claude-code.nvim",
-    lazy = "VeryLazy",
+    lazy = true,
+    cmd = {
+      "ClaudeCode",
+      "ClaudeCodeContinue",
+      "ClaudeCodeResume",
+      "ClaudeCodeVerbose",
+    },
+    keys = {
+      { "<M-c>", "<cmd>ClaudeCode<CR>", { desc = "Toggle Claude Code" } },
+    },
     dependencies = {
       "nvim-lua/plenary.nvim", -- Required for git operations
     },
@@ -473,73 +482,64 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
-    opts = {
-      -- Dynamic workspace: automatically detects vault from current file
-      workspaces = {
-        {
-          name = "auto",
-          path = function()
-            -- This function finds the nearest .obsidian directory upward from current file
-            local current_file = vim.api.nvim_buf_get_name(0)
-            if current_file == "" then
-              return vim.fn.getcwd() -- fallback to current directory
-            end
 
-            local dir = vim.fn.fnamemodify(current_file, ":h")
+    config = function()
+      -- This only runs ONCE when the plugin actually loads (when opening a .md file)
+      local function find_vault_root()
+        local current_file = vim.api.nvim_buf_get_name(0)
+        if current_file == "" then
+          return nil
+        end
 
-            -- Search upward for .obsidian directory (indicates vault root)
-            while dir ~= "/" and dir ~= "" do
-              if vim.fn.isdirectory(dir .. "/.obsidian") == 1 then
-                return dir
-              end
-              dir = vim.fn.fnamemodify(dir, ":h")
-            end
+        local dir = vim.fn.fnamemodify(current_file, ":h")
 
-            -- If no .obsidian found, use the directory of the current file
-            return vim.fn.fnamemodify(current_file, ":h")
-          end,
-        },
-      },
+        -- Search upward for .obsidian directory
+        while dir ~= "/" and dir ~= "" do
+          if vim.fn.isdirectory(dir .. "/.obsidian") == 1 then
+            return dir
+          end
+          dir = vim.fn.fnamemodify(dir, ":h")
+        end
 
-      -- Basic settings that work without strict workspace requirements
-      new_notes_location = "current_dir", -- Create notes in current directory
-      notes_subdir = vim.NIL, -- Don't use a subdirectory
+        return nil
+      end
 
-      completion = {
-        nvim_cmp = true,
-        min_chars = 2,
-      },
+      local vault_root = find_vault_root()
 
-      mappings = {
-        ["gf"] = {
-          action = function()
-            return require("obsidian").util.gf_passthrough()
-          end,
-          opts = { noremap = false, expr = true, buffer = true },
-        },
-        ["<leader>ch"] = {
-          action = function()
-            return require("obsidian").util.toggle_checkbox()
-          end,
-          opts = { buffer = true },
-        },
-      },
+      -- Only setup obsidian if we found a vault
+      if vault_root then
+        require("obsidian").setup {
+          workspaces = {
+            {
+              name = "detected-vault",
+              path = vault_root,
+            },
+          },
 
-      -- Disable features that require specific directory structures
-      daily_notes = {
-        folder = vim.NIL,
-      },
-      templates = {
-        folder = vim.NIL,
-      },
+          new_notes_location = "current_dir",
+          completion = { nvim_cmp = true, min_chars = 2 },
 
-      ui = {
-        enable = false,
-        -- checkboxes = {
-        --   [" "] = { char = "☐", hl_group = "ObsidianTodo" },
-        --   ["x"] = { char = "✔", hl_group = "ObsidianDone" },
-        -- },
-      },
-    },
+          mappings = {
+            ["gf"] = {
+              action = function()
+                return require("obsidian").util.gf_passthrough()
+              end,
+              opts = { noremap = false, expr = true, buffer = true },
+            },
+          },
+
+          -- Disable UI to avoid conflicts with render-markdown
+          ui = { enable = false },
+        }
+
+        -- Optional: Show confirmation
+        vim.notify("Obsidian vault detected: " .. vault_root, vim.log.levels.INFO)
+      else
+        -- If not in a vault, we can disable the plugin for this session
+        -- or just let it run with minimal configuration
+        vim.notify("Not in an Obsidian vault - obsidian.nvim features disabled", vim.log.levels.WARN)
+        return
+      end
+    end,
   },
 }
