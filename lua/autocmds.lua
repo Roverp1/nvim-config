@@ -43,3 +43,24 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.api.nvim_set_option_value("formatprg", "jq .", { scope = "local" })
   end,
 })
+
+-- Frontend files use 2 spaces
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {
+    "html",
+    "css",
+    "scss",
+    "javascript",
+    "typescript",
+    "javascriptreact",
+    "typescriptreact",
+    "json",
+    "yaml",
+    "markdown",
+  },
+  callback = function()
+    vim.bo.tabstop = 2
+    vim.bo.shiftwidth = 2
+    vim.bo.expandtab = true
+  end,
+})
