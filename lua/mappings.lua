@@ -6,6 +6,8 @@ local map = vim.keymap.set
 local unmap = vim.keymap.del
 
 -- UNMAP
+-- pcall(unmap, "n", "<C-v>")
+
 map("n", "<C-i>", "<C-i>zz", { desc = "Go to next jump" })
 
 --
@@ -41,11 +43,11 @@ map("n", "<leader>sa", "gg<S-v>G", { desc = "󰒆 Select All" })
 
 -- Change window size
 -- doenst fucnitnad s asdfasdf work
-map("n", "<C-,>", "<Cmd>vertical resize +2<CR>", { desc = "Resize window width by +2" })
-map("n", "<C-.>", "<Cmd>vertical resize -2<CR>", { desc = "Resize window width by -2" })
-map("n", "<C-=>", "<Cmd>horizontal resize +2<CR>", { desc = "Resize window height by +2" })
-map("n", "<C-->", "<Cmd>horizontal resize -2<CR>", { desc = "Resize window height by -2" })
-map("n", "<C-+>", "<C-w>=", { desc = "Resize window to default" })
+-- map("n", "<C-,>", "<Cmd>vertical resize +2<CR>", { desc = "Resize window width by +2" })
+-- map("n", "<C-.>", "<Cmd>vertical resize -2<CR>", { desc = "Resize window width by -2" })
+-- map("n", "<C-=>", "<Cmd>horizontal resize +2<CR>", { desc = "Resize window height by +2" })
+-- map("n", "<C-->", "<Cmd>horizontal resize -2<CR>", { desc = "Resize window height by -2" })
+-- map("n", "<C-+>", "<C-w>=", { desc = "Resize window to default" })
 
 map("n", "gb", "vato<ESC>zz", { desc = "󰅴 Go to opening of a tag" })
 map("n", "ge", "vat<ESC>zz", { desc = "󰅴 Go to closing of a tag" })
@@ -58,7 +60,7 @@ map("n", "ge", "vat<ESC>zz", { desc = "󰅴 Go to closing of a tag" })
 map("n", "<leader>tl", "<cmd>LiveServerToggle<cr>", { desc = " Toggle Live Server" })
 
 -- Minty color picker:
-map("n", "<leader>cc", "<cmd>lua require('minty.huefy').open()<cr>", { desc = " Open Minty Huefy color picker" })
+map("n", "<leader>cp", "<cmd>lua require('minty.huefy').open()<cr>", { desc = " Open Minty Huefy color picker" })
 
 -- Render Markdown
 map("n", "<leader>tm", "<cmd>RenderMarkdown toggle<cr>", { desc = " Toggle Markdown Render" })
