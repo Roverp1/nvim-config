@@ -4,6 +4,8 @@ local options = {
   formatters_by_ft = {
     lua = { "stylua" },
     python = { "black" },
+    go = { "goimports", "gofmt" },
+    sql = { "pg_format" },
     css = { "local_prettier", "prettierd", "prettier", stop_after_first = true },
     html = { "local_prettier", "prettierd", "prettier", stop_after_first = true },
     javascript = { "local_prettier", "prettierd", "prettier", stop_after_first = true },
