@@ -13,6 +13,7 @@ local options = {
     typescriptreact = { "local_prettier", "prettierd", "prettier", stop_after_first = true },
     markdown = { "local_prettier", "prettierd", "prettier", stop_after_first = true },
     json = { "local_prettier", "prettierd", "prettier", stop_after_first = true },
+    yaml = { "local_prettier", "prettierd", "prettier", stop_after_first = true },
   },
 
   formatters = {
